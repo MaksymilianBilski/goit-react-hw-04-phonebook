@@ -16,7 +16,6 @@ export const SearchForm = () => {
     </label>
   );
 };
-
 SearchForm.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
