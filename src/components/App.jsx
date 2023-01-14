@@ -72,18 +72,10 @@ export const App = () => {
         }}
       >
         <Section title="Phonebook">
-          <AddContacts onSubmit={onFormSubmit} />
+          <AddContacts />
         </Section>
-        <SearchForm value={filter} onChange={onFilterChange} />
-        {contacts !== undefined ? (
-          <ContactsList
-            bookArray={contacts}
-            filter={filter}
-            onDelete={onContactDelete}
-          />
-        ) : (
-          <></>
-        )}
+        <SearchForm />
+        {contacts !== undefined ? <ContactsList /> : <></>}
       </appContext.Provider>
     </div>
   );
