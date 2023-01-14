@@ -1,16 +1,20 @@
+import { useContactsContext } from 'components/ContactsList/ContactsList';
+import { useAppContext } from 'components/App';
 import css from './ContactListItem.module.css';
 import PropTypes from 'prop-types';
 
-export const ContactListItem = ({ contact, onDelete }) => {
+export const ContactListItem = () => {
+  const { name, number, id } = useContactsContext();
+  const { onContactDelete } = useAppContext();
   return (
     <>
       <li className={css.listItem}>
         {' '}
-        {contact.name}: {contact.number}{' '}
+        {name}: {number}{' '}
         <button
           className={css.button}
           type="button"
-          onClick={() => onDelete(contact.id)}
+          onClick={() => onContactDelete(id)}
         >
           DELETE
         </button>

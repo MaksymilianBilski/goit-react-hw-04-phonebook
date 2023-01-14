@@ -3,7 +3,10 @@ import { Section } from './Section/Section';
 import { SearchForm } from './SearchByName/SearchForm';
 import { nanoid } from 'nanoid';
 import { ContactsList } from './ContactsList/ContactsList';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext, createContext } from 'react';
+
+export const appContext = createContext();
+export const useAppContext = () => useContext(appContext);
 
 export const App = () => {
   const [contacts, setContacts] = useState([]);
@@ -59,19 +62,29 @@ export const App = () => {
 
   return (
     <div>
-      <Section title="Phonebook">
-        <AddContacts onSubmit={onFormSubmit} />
-      </Section>
-      <SearchForm value={filter} onChange={onFilterChange} />
-      {contacts !== undefined ? (
-        <ContactsList
-          bookArray={contacts}
-          filter={filter}
-          onDelete={onContactDelete}
-        />
-      ) : (
-        <></>
-      )}
+      <appContext.Provider
+        value={{
+          contacts,
+          filter,
+          onFilterChange,
+          onContactDelete,
+          onFormSubmit,
+        }}
+      >
+        <Section title="Phonebook">
+          <AddContacts onSubmit={onFormSubmit} />
+        </Section>
+        <SearchForm value={filter} onChange={onFilterChange} />
+        {contacts !== undefined ? (
+          <ContactsList
+            bookArray={contacts}
+            filter={filter}
+            onDelete={onContactDelete}
+          />
+        ) : (
+          <></>
+        )}
+      </appContext.Provider>
     </div>
   );
 };
