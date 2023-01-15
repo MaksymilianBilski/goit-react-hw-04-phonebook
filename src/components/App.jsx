@@ -1,12 +1,11 @@
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { AddContacts } from './Form/Form';
 import { Section } from './Section/Section';
 import { SearchForm } from './SearchByName/SearchForm';
 import { nanoid } from 'nanoid';
 import { ContactsList } from './ContactsList/ContactsList';
-import { useEffect, useState, useContext, createContext } from 'react';
-
-export const appContext = createContext();
-export const useAppContext = () => useContext(appContext);
+import { PhonebookContext } from './context/PhonebookContext/PhonebookContext';
 
 export const App = () => {
   const [contacts, setContacts] = useState([]);
@@ -56,13 +55,13 @@ export const App = () => {
   const onContactDelete = id => {
     const deletedContacts = contacts.filter(contact => contact.id !== id);
     localStorage.setItem('deletedContacts', JSON.stringify(deletedContacts));
-    setContacts(contacts.filter(contact => contact.id !== id));
-    localStorage.setItem('contacts', JSON.stringify(contacts));
+    setContacts(deletedContacts);
+    localStorage.setItem('contacts', JSON.stringify(deletedContacts));
   };
 
   return (
     <div>
-      <appContext.Provider
+      <PhonebookContext.Provider
         value={{
           contacts,
           filter,
@@ -76,7 +75,17 @@ export const App = () => {
         </Section>
         <SearchForm />
         {contacts !== undefined ? <ContactsList /> : <></>}
-      </appContext.Provider>
+      </PhonebookContext.Provider>
     </div>
   );
+};
+
+PhonebookContext.Provider.propTypes = {
+  value: PropTypes.shape({
+    contacts: PropTypes.array,
+    filter: PropTypes.string,
+    onFilterChange: PropTypes.func,
+    onContactDelete: PropTypes.func,
+    onFormSubmit: PropTypes.func,
+  }),
 };

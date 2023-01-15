@@ -1,11 +1,10 @@
-import { useContactsContext } from 'components/ContactsList/ContactsList';
-import { useAppContext } from 'components/App';
+import { useContactsContext } from 'components/context/ContactsContext/ContactsContext';
+import { usePhonebookContext } from '../context/PhonebookContext/PhonebookContext';
 import css from './ContactListItem.module.css';
-import PropTypes from 'prop-types';
 
 export const ContactListItem = () => {
   const { name, number, id } = useContactsContext();
-  const { onContactDelete } = useAppContext();
+  const { onContactDelete } = usePhonebookContext();
   return (
     <>
       <li className={css.listItem}>
@@ -23,7 +22,3 @@ export const ContactListItem = () => {
   );
 };
 
-ContactListItem.propTypes = {
-  contact: PropTypes.object,
-  onDelete: PropTypes.func,
-};

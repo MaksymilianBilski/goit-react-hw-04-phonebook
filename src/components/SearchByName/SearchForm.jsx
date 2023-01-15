@@ -1,9 +1,8 @@
-import { useAppContext } from 'components/App';
+import { usePhonebookContext } from '../context/PhonebookContext/PhonebookContext';
 import css from './SearchForm.module.css';
-import PropTypes from 'prop-types';
 
 export const SearchForm = () => {
-  const { filter, onFilterChange } = useAppContext();
+  const { filter, onFilterChange } = usePhonebookContext();
   return (
     <label className={css.label}>
       Find contacts by name:
@@ -15,8 +14,4 @@ export const SearchForm = () => {
       />
     </label>
   );
-};
-SearchForm.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func,
 };

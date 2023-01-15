@@ -1,14 +1,11 @@
-import { useAppContext } from 'components/App';
-import { createContext, useContext } from 'react';
+import { usePhonebookContext } from '../context/PhonebookContext/PhonebookContext';
+import { ContactsContext } from 'components/context/ContactsContext/ContactsContext';
 import { ContactListItem } from 'components/ContactListItem/ContactListItem';
 import css from './ContactsList.module.css';
 import PropTypes from 'prop-types';
 
-export const contactsContext = createContext();
-export const useContactsContext = () => useContext(contactsContext);
-
 export const ContactsList = () => {
-  const { contacts, filter, onContactDelete } = useAppContext();
+  const { contacts, filter, onContactDelete } = usePhonebookContext();
   const filteredArray = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
@@ -16,20 +13,21 @@ export const ContactsList = () => {
     <ol className={css.list}>
       <h5>Contacts</h5>
       {filteredArray.map(({ id, name, number }) => (
-        <contactsContext.Provider value={{ id, name, number }}>
+        <ContactsContext.Provider value={{ id, name, number }}>
           <ContactListItem
             key={id}
             contact={{ id, name, number }}
             onDelete={onContactDelete}
           />
-        </contactsContext.Provider>
+        </ContactsContext.Provider>
       ))}
     </ol>
   );
 };
 
-ContactsList.propTypes = {
-  bookArray: PropTypes.array,
-  filter: PropTypes.string,
-  onDelete: PropTypes.func,
+ContactsContext.Provider.propTypes = {
+  name: PropTypes.string,
+  number: PropTypes.number,
+  id: PropTypes.string,
+  onContactDelete: PropTypes.func,
 };
