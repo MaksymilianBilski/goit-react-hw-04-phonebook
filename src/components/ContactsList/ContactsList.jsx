@@ -1,5 +1,5 @@
 import { usePhonebookContext } from '../context/PhonebookContext/PhonebookContext';
-import { ContactsContext } from 'components/context/ContactsContext/ContactsContext';
+import ContactsProvider from 'components/context/ContactsContext/ContactsContext';
 import { ContactListItem } from 'components/ContactListItem/ContactListItem';
 import css from './ContactsList.module.css';
 import PropTypes from 'prop-types';
@@ -13,19 +13,19 @@ export const ContactsList = () => {
     <ol className={css.list}>
       <h5>Contacts</h5>
       {filteredArray.map(({ id, name, number }) => (
-        <ContactsContext.Provider value={{ id, name, number }}>
+        <ContactsProvider value={{ id, name, number }}>
           <ContactListItem
             key={id}
             contact={{ id, name, number }}
             onDelete={onContactDelete}
           />
-        </ContactsContext.Provider>
+        </ContactsProvider>
       ))}
     </ol>
   );
 };
 
-ContactsContext.Provider.propTypes = {
+ContactsProvider.propTypes = {
   name: PropTypes.string,
   number: PropTypes.number,
   id: PropTypes.string,
