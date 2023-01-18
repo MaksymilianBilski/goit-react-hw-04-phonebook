@@ -1,15 +1,14 @@
-import { useContactsContext } from 'components/context/ContactsContext/ContactsContext';
-import { usePhonebookContext } from '../context/PhonebookContext/PhonebookContext';
+import { usePhonebookContext } from '../context/PhonebookContext';
 import css from './ContactListItem.module.css';
 
-export const ContactListItem = () => {
-  const { name, number, id } = useContactsContext();
+export const ContactListItem = ({ contact }) => {
+  const { name, id, number } = contact;
   const { onContactDelete } = usePhonebookContext();
   return (
     <>
       <li className={css.listItem}>
         {' '}
-        {name}: {number}{' '}
+        {name}: {number}
         <button
           className={css.button}
           type="button"
@@ -21,4 +20,3 @@ export const ContactListItem = () => {
     </>
   );
 };
-
