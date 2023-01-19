@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { AddContacts } from './Form/Form';
+import { AddContacts } from './Form/ContactsList';
 import { Section } from './Section/Section';
 import { SearchForm } from './SearchByName/SearchForm';
 import { ContactsList } from './ContactsList/ContactsList';

@@ -51,7 +51,6 @@ const PhonebookProvider = ({ children }) => {
 
   const onContactDelete = id => {
     const deletedContacts = contacts.filter(contact => contact.id !== id);
-    localStorage.setItem('deletedContacts', JSON.stringify(deletedContacts));
     setContacts(deletedContacts);
     localStorage.setItem('contacts', JSON.stringify(deletedContacts));
   };
