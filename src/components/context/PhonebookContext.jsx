@@ -7,6 +7,7 @@ export const usePhonebookContext = () => useContext(PhonebookContext);
 const PhonebookProvider = ({ children }) => {
   const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState('');
+
   useEffect(() => {
     if (
       JSON.parse(localStorage.getItem('contacts')) === undefined ||
