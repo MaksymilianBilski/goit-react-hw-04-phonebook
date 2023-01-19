@@ -1,4 +1,4 @@
-import { usePhonebookContext } from '../context/PhonebookContext';
+import { usePhonebookContext } from '../../context/PhonebookContext';
 import { ContactListItem } from 'components/ContactListItem/ContactListItem';
 import css from './ContactsList.module.css';
 

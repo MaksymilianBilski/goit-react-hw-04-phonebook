@@ -1,4 +1,4 @@
-import { usePhonebookContext } from '../context/PhonebookContext';
+import { usePhonebookContext } from '../../context/PhonebookContext';
 import css from './SearchForm.module.css';
 
 export const SearchForm = () => {

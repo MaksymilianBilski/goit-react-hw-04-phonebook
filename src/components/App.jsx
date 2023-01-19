@@ -6,8 +6,8 @@ import { ContactsList } from './ContactsList/ContactsList';
 import {
   PhonebookContext,
   usePhonebookContext,
-} from './context/PhonebookContext';
-import PhonebookProvider from './context/PhonebookContext';
+} from '../context/PhonebookContext';
+import PhonebookProvider from '../context/PhonebookContext';
 
 export const App = () => {
   const { contacts } = usePhonebookContext();
